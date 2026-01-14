@@ -4,27 +4,22 @@
 
         @forelse ($tickets as $ticket)
             <div class="p-4 mb-4 bg-white shadow rounded">
-                <h2 class="font-bold">{{ $ticket->title }}</h2>
-
-                <p>Автор: {{ $ticket->user->name ?? '—' }}</p>
-                <p>Категория: {{ $ticket->category }}</p>
-                <p>Приоритет: {{ $ticket->priority }}</p>
-                <p>Текущий статус: <strong>{{ $ticket->status }}</strong></p>
-
+                <h2 class="font-bold"> <strong>{{ $ticket->title }}</strong></h2>
+                <p>Категория: <strong>{{ $ticket->category }}</strong></p>
+                <p>Приоритет: <strong> {{ $ticket->priority }} </strong></p>
+                <p class="text-gray-700">Описание: <strong>{{ $ticket->description }}</strong></p>
                 <form method="POST" action="/admin/tickets/{{ $ticket->id }}" class="mt-3">
                     @csrf
                     @method('PATCH')
 
-                    <select name="status" class="border rounded px-2 py-1">
+                    <select name="status" class="border rounded px-10 py-1">
                         <option value="new">new</option>
-                        <option value="in_progress">in_progress</option>
-                        <option value="done">done</option>
-                        <option value="rejected">rejected</option>
+                        <option value="in_progress">В прогрессе</option>
+                        <option value="done">Выполнено</option>
+                        <option value="rejected">Отклонено</option>
                     </select>
 
-                    <button class="ml-2 bg-blue-500 text-white px-3 py-1 rounded">
-                        Сохранить
-                    </button>
+                    <button class="ml-2 bg-blue-500 text-white px-3 py-1 rounded">Сохранить</button>
                 </form>
             </div>
         @empty

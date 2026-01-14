@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/tickets', [AdminTicketController::class, 'index']);
     Route::patch('/admin/tickets/{ticket}', [AdminTicketController::class, 'update']);
